@@ -16,6 +16,15 @@ export default function SkeletonTable() {
               <th className="p-3 text-left">
                 <div className="h-4 w-16 rounded bg-neutral-800" />
               </th>
+              <th className="p-3 text-left">
+                <div className="h-4 w-16 rounded bg-neutral-800" />
+              </th>
+              <th className="p-3 text-left">
+                <div className="h-4 w-16 rounded bg-neutral-800" />
+              </th>
+              <th className="p-3 text-left">
+                <div className="h-4 w-16 rounded bg-neutral-800" />
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -24,6 +33,15 @@ export default function SkeletonTable() {
                 key={index}
                 className="border-t border-neutral-400 odd:bg-neutral-800"
               >
+                <td className="p-3">
+                  <div className="h-4 w-full rounded bg-neutral-800" />
+                </td>
+                <td className="p-3">
+                  <div className="h-4 w-full rounded bg-neutral-800" />
+                </td>
+                <td className="p-3">
+                  <div className="h-4 w-full rounded bg-neutral-800" />
+                </td>
                 <td className="p-3">
                   <div className="h-4 w-full rounded bg-neutral-800" />
                 </td>

@@ -9,8 +9,12 @@ type Store = {
   setSearch: (value: string) => void;
   sortDirection: "asc" | "desc";
   setSortDirection: (value: "asc" | "desc") => void;
-  sortOrder: "name" | "email" | "website";
-  setSortOrder: (value: "name" | "email" | "website") => void;
+  sortOrder: "name" | "email" | "website" | "pending-todo" | "completed-todo";
+  setSortOrder: (
+    value: "name" | "email" | "website" | "pending-todo" | "completed-todo",
+  ) => void;
+  filter: string;
+  setFilter: (value: string) => void;
   reset: () => void;
 };
 
@@ -24,5 +28,8 @@ export const useUserStore = create<Store>((set) => ({
   setSortDirection: (value) => set({ sortDirection: value }),
   sortOrder: "name",
   setSortOrder: (value) => set({ sortOrder: value }),
-  reset: () => set({ search: "", sortDirection: "asc", sortOrder: "name" }),
+  filter: "",
+  setFilter: (value) => set({ filter: value }),
+  reset: () =>
+    set({ search: "", sortDirection: "asc", sortOrder: "name", filter: "" }),
 }));

@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import UserClient from "./_component/UserClient";
 import { User } from "./_type/user";
+import { Todo } from "./_type/todo";
+import { Post } from "./_type/post";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -10,11 +12,35 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-    // next: { revalidate: 60 },
-  });
-  const users: User[] = await response.json();
-  users?.sort((a, b) => {
+  const responseUsers = await fetch(
+    "https://jsonplaceholder.typicode.com/users",
+    {
+      next: { revalidate: 60 },
+    },
+  );
+  const responsePosts = await fetch(
+    "https://jsonplaceholder.typicode.com/posts",
+    { next: { revalidate: 60 } },
+  );
+  const responseTodos = await fetch(
+    "https://jsonplaceholder.typicode.com/todos",
+    { next: { revalidate: 60 } },
+  );
+
+  const posts: Post[] = await responsePosts.json();
+  const todos: Todo[] = await responseTodos.json();
+  const users: User[] = await responseUsers.json();
+
+  const refactorUser = users?.map((user) => ({
+    ...user,
+    todos: todos
+      ?.filter((todo) => todo.userId === user.id)
+      ?.sort((a, b) => a.id - b.id),
+    posts: posts
+      ?.filter((post) => post.userId === user.id)
+      ?.sort((a, b) => a.id - b.id),
+  }));
+  refactorUser?.sort((a, b) => {
     const first = a["name"]?.toLowerCase();
     const second = b["name"]?.toLowerCase();
 
@@ -27,7 +53,7 @@ export default async function Page() {
         <div className="flex items-center justify-start w-full">
           <h1 className="text-2xl font-bold">List of Users</h1>
         </div>
-        <UserClient initialUsers={users ?? []} />
+        <UserClient initialUsers={refactorUser ?? []} />
       </main>
     </div>
   );

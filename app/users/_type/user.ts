@@ -1,3 +1,6 @@
+import { Post } from "./post";
+import { Todo } from "./todo";
+
 export type User = {
   id: number;
   name: string;
@@ -7,6 +10,8 @@ export type User = {
   phone: string;
   website: string;
   company?: UserCompany;
+  todos?: Todo[];
+  posts?: Post[];
 };
 
 export type UserAddress = {
