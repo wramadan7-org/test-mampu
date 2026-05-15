@@ -167,7 +167,7 @@ export default function UserClient({ initialUsers }: Props) {
           placeholder="Search by name, email..."
           className="border border-neutral-400 rounded-md p-2 w-full sm:max-w-sm text-sm sm:text-base"
         />
-        <div className="flex flex-row w-full gap-2">
+        <div className="flex flex-row w-full gap-2 items-center justify-end">
           <Dropdown
             value={filterCore}
             onChange={setFilterCore}
