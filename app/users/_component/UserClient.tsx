@@ -195,26 +195,26 @@ export default function UserClient({ initialUsers }: Props) {
               <ListFilter size={16} />
             </button>
             {isOpenFilter && (
-              <div className="absolute z-10 top-[110%] left-1/2 transform bg-neutral-900 rounded-lg transition-all duration-75 text-sm py-1 w-full sm:w-fit shadow shadow-neutral-200 min-w-xs right-full translate-x-[-94.5%]">
+              <div className="absolute z-10 top-[120%] left-1/2 transform bg-neutral-950 rounded-lg transition-all duration-75 text-sm py-1 w-full sm:w-fit shadow shadow-neutral-200 min-w-xs right-full translate-x-[-94.5%]">
                 <ul className="space-y-0.5">
                   <li className="flex items-center justify-between w-full gap-2">
                     <div className="flex flex-1 w-full border border-neutral-800" />
                     <span className="text-xs">Sort Direction</span>
                     <div className="flex flex-1 w-full border border-neutral-800" />
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortDirection === "asc" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortDirection === "asc" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSort("asc")}
                     >
                       Ascending {sortDirection === "asc" && <Check size={12} />}
                     </button>
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortDirection === "desc" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortDirection === "desc" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSort("desc")}
                     >
                       Descending{" "}
@@ -226,47 +226,47 @@ export default function UserClient({ initialUsers }: Props) {
                     <span className="text-xs">Sort Order</span>
                     <div className="flex flex-1 w-full border border-neutral-800" />
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "name" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "name" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSortBy("name")}
                     >
                       Name {sortOrder === "name" && <Check size={12} />}
                     </button>
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "email" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "email" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSortBy("email")}
                     >
                       Email {sortOrder === "email" && <Check size={12} />}
                     </button>
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "website" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "website" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSortBy("website")}
                     >
                       Website {sortOrder === "website" && <Check size={12} />}
                     </button>
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "pending-todo" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "pending-todo" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSortBy("pending-todo")}
                     >
                       Pending Todo{" "}
                       {sortOrder === "pending-todo" && <Check size={12} />}
                     </button>
                   </li>
-                  <li className="hover:bg-neutral-800">
+                  <li className="hover:bg-neutral-900">
                     <button
                       type="button"
-                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "completed-todo" && "bg-neutral-700"}`}
+                      className={`w-full cursor-pointer p-2 flex gap-2 items-center justify-between min-w-32 ${sortOrder === "completed-todo" && "bg-neutral-900"}`}
                       onClick={() => handleChangeSortBy("completed-todo")}
                     >
                       Completed Todo{" "}
