@@ -14,6 +14,8 @@ import Link from "next/link";
 import InfoItem from "./_component/InfoItem";
 import { Metadata } from "next";
 import NotFound from "./_component/NotFound";
+import { Post } from "../_type/post";
+import { Todo } from "../_type/todo";
 
 type Props = {
   params: Promise<{ id: number }>;
@@ -42,11 +44,32 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { id } = await params;
-  const response = await fetch(
+  const responseUser = await fetch(
     `https://jsonplaceholder.typicode.com/users/${id}`,
     { next: { revalidate: 60 } },
   );
-  const user: User = await response.json();
+  const responsePosts = await fetch(
+    "https://jsonplaceholder.typicode.com/posts",
+    { next: { revalidate: 60 } },
+  );
+  const responseTodos = await fetch(
+    "https://jsonplaceholder.typicode.com/todos",
+    { next: { revalidate: 60 } },
+  );
+
+  const posts: Post[] = await responsePosts.json();
+  const todos: Todo[] = await responseTodos.json();
+  const user: User = await responseUser.json();
+
+  const filteredPosts = posts
+    ?.filter((post) => post?.userId === Number(id))
+    ?.sort((a, b) => a.id - b.id);
+  const filteredTodos = todos
+    ?.filter((todo) => todo?.userId === Number(id))
+    ?.sort((a, b) => a.id - b.id);
+
+  user.todos = filteredTodos;
+  user.posts = filteredPosts;
 
   const splitName = user?.name?.split(" ");
   const initialName =
@@ -132,6 +155,63 @@ export default async function Page({ params }: Props) {
             label="Zipcode"
             value={user?.address?.zipcode ?? "-"}
           />
+        </div>
+        <div className="flex flex-col gap-2 w-full border rounded-lg p-3 border-neutral-800 shadow shadow-neutral-800">
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-xl font-bold underline">Posts User</span>
+            {user.posts?.length > 5 && (
+              <Link
+                href={`/users/${user.id}/posts`}
+                className="w-fit text-xs font-semibold hover:underline cursor-pointer"
+              >
+                See More
+              </Link>
+            )}
+          </div>
+          {user.posts
+            ?.sort((a, b) => b.id - a.id)
+            ?.slice(0, 5)
+            ?.map((post) => (
+              <div
+                key={post.id}
+                className="border border-neutral-800 rounded-lg p-2 shadow-sm hover:shadow-md transition"
+              >
+                <h3 className="font-semibold line-clamp-2">{post.title}</h3>
+
+                <p className="text-sm text-neutral-500 mt-2 line-clamp-4">
+                  {post.body}
+                </p>
+              </div>
+            ))}
+        </div>
+        <div className="flex flex-col gap-2 w-full border rounded-lg p-3 border-neutral-800 shadow shadow-neutral-800">
+          <div className="flex flex-row items-center justify-between">
+            <span className="text-xl font-bold underline">Todos User</span>
+            {user.todos?.length > 5 && (
+              <Link
+                href={`/users/${user.id}/todos`}
+                className="w-fit text-xs font-semibold hover:underline cursor-pointer"
+              >
+                See More
+              </Link>
+            )}
+          </div>
+          {user.todos
+            ?.sort((a, b) => b.id - a.id)
+            ?.slice(0, 5)
+            ?.map((todo) => (
+              <div
+                key={todo.id}
+                className="flex flex-row flex-wrap border border-neutral-800 rounded-lg p-2 shadow-sm hover:shadow-md transition items-center justify-between"
+              >
+                <h3 className="font-semibold line-clamp-2">{todo.title}</h3>
+                <span
+                  className={`${todo?.completed ? "text-green-300" : "text-yellow-300"} text-sm`}
+                >
+                  {todo.completed ? "Completed" : "Pending"}
+                </span>
+              </div>
+            ))}
         </div>
       </main>
     </div>
